@@ -48,9 +48,29 @@ class TD3Agent:
 
         # setup replay buffer memory
         self.memory = ReplayBuffer(max_size, input_dims, self.n_actions)
+        self.input_dims = input_dims
 
         # initialize actor and critic netwprks
         self._initialize_networks(self.n_actions)
+
+        # --------------------------------------------------------------------
+        # FORCE NETWORK BUILD (Required to fix the ValueError)
+        # --------------------------------------------------------------------
+        state_input_shape = (self.input_dims,)
+        total_input_dims = self.input_dims + self.n_actions
+        action_input_shape = (total_input_dims,)
+
+        # Build Actor Networks
+        self.actor.build(state_input_shape)
+        self.target_actor.build(state_input_shape)
+        
+        # Build Critic Networks 
+        self.critic_1.build(action_input_shape)
+        self.critic_2.build(action_input_shape)
+        self.target_critic_1.build(action_input_shape)
+        self.target_critic_2.build(action_input_shape)
+        # --------------------------------------------------------------------
+
         self.update_parameters(tau=1)
 
     def choose_action(self, observation):
