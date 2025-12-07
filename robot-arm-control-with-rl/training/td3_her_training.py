@@ -56,6 +56,9 @@ if __name__ == "__main__":
         
         # Augmente replay buffer with HER
         her_augmentation(agent, obs_array, actions_array, new_obs_array)
+        
+        if i == 0:
+            agent.save_models()
 
         # train the agent in multiple optimization steps
         for _ in range(opt_steps):

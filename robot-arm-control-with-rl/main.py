@@ -3,6 +3,7 @@ import panda_gym
 from numpngw import write_apng
 from IPython.display import Image
 from agents.td3 import TD3Agent
+import numpy as np
 
 env = gym.make("PandaReach-v3", render_mode="rgb_array")
 obs_shape = env.observation_space['observation'].shape[0] + \

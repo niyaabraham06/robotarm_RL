@@ -8,7 +8,7 @@ class ActorNetwork(keras.Model):
         super(ActorNetwork, self).__init__()
         if not os.path.exists(checkpoints_dir):
             os.mkdir(checkpoints_dir)
-        self.checkpoints_file = os.path.join(checkpoints_dir + model, name + ".h5")
+        self.checkpoints_file = os.path.join(checkpoints_dir + model, name + ".weights.h5")
 
         self.layer1 = Dense(512, activation="relu")
         self.layer2 = Dense(256, activation="relu")
@@ -29,7 +29,7 @@ class CriticNetwork(keras.Model):
         super(CriticNetwork, self).__init__()
         if not os.path.exists(checkpoints_dir):
             os.mkdir(checkpoints_dir)
-        self.checkpoints_file = os.path.join(checkpoints_dir + model, name + ".h5")
+        self.checkpoints_file = os.path.join(checkpoints_dir + model, name + ".weights.h5")
 
         self.layer1 = Dense(512, activation="relu")
         self.layer2 = Dense(256, activation="relu")
