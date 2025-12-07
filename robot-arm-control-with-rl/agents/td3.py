@@ -3,6 +3,7 @@ import tensorflow as tf
 import tensorflow.keras as keras
 from replay_memory.ReplayBuffer import ReplayBuffer
 from utils.networks import ActorNetwork, CriticNetwork
+import os
 
 ## Actor-critic networks parameters :
 # actor learning rate
@@ -203,6 +204,12 @@ class TD3Agent:
 
     def save_models(self):
         print("---- saving models ----")
+        
+        import os
+        checkpoint_dir = os.path.dirname(self.actor.checkpoints_file)
+        if not os.path.exists(checkpoint_dir):
+            os.makedirs(checkpoint_dir)
+
         self.actor.save_weights(self.actor.checkpoints_file)
         self.critic_1.save_weights(self.critic_1.checkpoints_file)
         self.critic_2.save_weights(self.critic_2.checkpoints_file)
