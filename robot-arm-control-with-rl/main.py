@@ -2,15 +2,15 @@ import gymnasium as gym
 import panda_gym
 from numpngw import write_apng
 from IPython.display import Image
-from agents.ddpg import DDPGAgent
+from agents.td3 import TD3Agent
 
 env = gym.make("PandaReach-v3", render_mode="rgb_array")
 obs_shape = env.observation_space['observation'].shape[0] + \
                 env.observation_space['achieved_goal'].shape[0] + \
                 env.observation_space['desired_goal'].shape[0]
 
-# Choose your trained agent : DDPG or TD3
-agent = DDPGAgent(env=env, input_dims=obs_shape)
+# Change from DDPGAgent:
+agent = TD3Agent(env=env, input_dims=obs_shape)
 # load pre-trained networks weights
 agent.load_models()
 
